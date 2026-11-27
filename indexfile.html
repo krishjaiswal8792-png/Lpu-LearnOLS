@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="LPU Learn - Online Learning Management System by Team ALBEDO">
+  <title>LPU Learn | Online Learning Management System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== TOP NAVIGATION BAR ===== -->
+  <header class="topbar">
+    <a class="brand" href="#" onclick="showView('courses'); return false;">LPU Learn</a>
+    <button class="menu-btn" aria-label="Open menu" onclick="toggleMenu()">&#9776;</button>
+
+    <nav id="nav" class="nav">
+      <button onclick="showView('courses')">Courses</button>
+      <button id="nav-learning" onclick="showView('learning')">My Learning</button>
+      <button id="nav-notifications" onclick="showView('notifications')">
+        Notifications <span id="badge" class="badge hidden">0</span>
+      </button>
+      <button id="nav-admin" onclick="showView('admin')">Admin</button>
+      <button id="nav-profile" onclick="showView('profile')">Profile</button>
+      <button id="themeBtn" class="theme-btn" onclick="cycleTheme()" title="Change theme">&#9728;&#65039;</button>
+      <button id="nav-login" class="nav-cta" onclick="showView('auth')">Login</button>
+      <button id="nav-logout" class="nav-cta" onclick="logout()">Logout</button>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== VIEW 1: COURSE CATALOG (home page) ===== -->
+    <section id="view-courses" class="view">
+      <div class="hero">
+        <h1>Learn at your own pace, right from your LPU account.</h1>
+        <p>Browse courses, enroll in one click and track your progress lesson by lesson.</p>
+      </div>
+
+      <div class="filters">
+        <input id="searchBox" type="search" placeholder="Search courses by title or instructor" oninput="renderCourses()">
+        <select id="categoryFilter" onchange="renderCourses()"></select>
+      </div>
+
+      <div id="courseGrid" class="grid"></div>
+    </section>
+
+    <!-- ===== VIEW 2: COURSE DETAIL ===== -->
+    <section id="view-detail" class="view hidden">
+      <button class="link-btn" onclick="showView('courses')">&larr; Back to courses</button>
+      <div id="courseDetail"></div>
+    </section>
+
+    <!-- ===== VIEW: LESSON (theory page) ===== -->
+    <section id="view-lesson" class="view hidden">
+      <button class="link-btn" onclick="openCourse(openCourseId)">&larr; Back to course</button>
+      <div id="lessonPage"></div>
+    </section>
+
+    <!-- ===== VIEW 3: MY LEARNING (progress tracking) ===== -->
+    <section id="view-learning" class="view hidden">
+      <h2>My Learning</h2>
+      <div id="learningList" class="grid"></div>
+    </section>
+
+    <!-- ===== VIEW 4: PROFILE ===== -->
+    <section id="view-profile" class="view hidden">
+      <h2>My Profile</h2>
+      <form id="profileForm" class="panel form" onsubmit="saveProfile(event)">
+        <label>Full name
+          <input id="pName" type="text" required>
+        </label>
+        <label>Email (cannot be changed)
+          <input id="pEmail" type="email" disabled>
+        </label>
+        <label>Registration number
+          <input id="pReg" type="text" placeholder="e.g. 12607514">
+        </label>
+        <label>Branch / Section
+          <input id="pBranch" type="text" placeholder="e.g. B.Tech CSE, K24XX">
+        </label>
+        <label>About me
+          <textarea id="pBio" rows="3" placeholder="Write a short line about yourself"></textarea>
+        </label>
+        <button class="btn" type="submit">Save profile</button>
+      </form>
+    </section>
+
+    <!-- ===== VIEW 5: NOTIFICATIONS ===== -->
+    <section id="view-notifications" class="view hidden">
+      <div class="row-between">
+        <h2>Notifications</h2>
+        <button class="btn btn-light" onclick="markAllRead()">Mark all as read</button>
+      </div>
+      <ul id="noteList" class="note-list"></ul>
+    </section>
+
+    <!-- ===== VIEW 6: ADMIN PANEL ===== -->
+    <section id="view-admin" class="view hidden">
+      <h2>Admin Dashboard</h2>
+      <div id="adminStats" class="stats"></div>
+
+      <h3>Add a new course</h3>
+      <form id="courseForm" class="panel form" onsubmit="addCourse(event)">
+        <label>Course title
+          <input id="cTitle" type="text" required>
+        </label>
+        <label>Category
+          <input id="cCategory" type="text" placeholder="e.g. Programming" required>
+        </label>
+        <label>Instructor
+          <input id="cInstructor" type="text" required>
+        </label>
+        <label>Level
+          <select id="cLevel">
+            <option>Beginner</option>
+            <option>Intermediate</option>
+            <option>Advanced</option>
+          </select>
+        </label>
+        <label>Description
+          <textarea id="cDesc" rows="2" required></textarea>
+        </label>
+        <label>Lessons (one per line: Title | theory text)
+          <textarea id="cLessons" rows="4" required></textarea>
+        </label>
+        <button class="btn" type="submit">Add course</button>
+      </form>
+
+      <h3>Manage courses</h3>
+      <div class="table-wrap"><table id="adminCourses"></table></div>
+
+      <h3>Registered users</h3>
+      <div class="table-wrap"><table id="adminUsers"></table></div>
+    </section>
+
+    <!-- ===== VIEW 7: LOGIN / REGISTER ===== -->
+    <section id="view-auth" class="view hidden">
+      <div class="panel auth-box">
+        <div class="tabs">
+          <button id="tab-login" class="tab active" onclick="showAuth('login')">Login</button>
+          <button id="tab-register" class="tab" onclick="showAuth('register')">Register</button>
+        </div>
+
+        <form id="loginForm" class="form" onsubmit="login(event)">
+          <label>Email
+            <input id="lEmail" type="email" required>
+          </label>
+          <label>Password
+            <input id="lPass" type="password" required>
+          </label>
+          <button class="btn" type="submit">Login</button>
+        </form>
+
+        <form id="registerForm" class="form hidden" onsubmit="register(event)">
+          <label>Full name
+            <input id="rName" type="text" required>
+          </label>
+          <label>Registration number
+            <input id="rReg" type="text" required>
+          </label>
+          <label>Email
+            <input id="rEmail" type="email" required>
+          </label>
+          <label>Password (minimum 6 characters)
+            <input id="rPass" type="password" minlength="6" required>
+          </label>
+          <button class="btn" type="submit">Create account</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>LPU Learn &middot; CSE326 Internet Programming CA-1 &middot; Team ALBEDO</p>
+  </footer>
+
+  <!-- small pop-up message -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="content.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

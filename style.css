@@ -1,0 +1,330 @@
+/* =========================================================
+   LPU Learn - Stylesheet
+   Colours are stored in variables so you can change the
+   whole theme from this one place.
+   ========================================================= */
+:root {
+  --orange: #e8650a;
+  --orange-dark: #c25205;
+  --ink: #23262d;
+  --muted: #666d79;
+  --bg: #f2f4f8;
+  --white: #ffffff;
+  --line: #dde1e8;
+  --green: #1f9d55;
+  --red: #c0392b;
+  --radius: 10px;
+  --surface: #ffffff;
+  --bar: #23262d;
+  --soft: #e6e9ef;
+  --tag-bg: #fdeee2;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.55;
+}
+
+h1, h2, h3 { line-height: 1.25; }
+h2 { margin-bottom: 16px; }
+h3 { margin: 28px 0 12px; }
+
+.hidden { display: none !important; }
+.muted { color: var(--muted); }
+.small { font-size: 0.85rem; }
+
+/* ---------- Top bar ---------- */
+.topbar {
+  background: var(--bar);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.brand {
+  color: var(--white);
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 3px solid var(--orange);
+}
+
+.nav { display: flex; gap: 6px; align-items: center; }
+
+.nav button {
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 0.95rem;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.nav button:hover { background: #3a3e48; }
+.nav .nav-cta { background: var(--orange); font-weight: 600; }
+.nav .nav-cta:hover { background: var(--orange-dark); }
+
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
+.badge {
+  background: var(--orange);
+  color: var(--white);
+  border-radius: 20px;
+  padding: 0 7px;
+  font-size: 0.75rem;
+  margin-left: 4px;
+}
+
+/* ---------- Layout ---------- */
+main { max-width: 1100px; margin: 0 auto; padding: 24px 16px 40px; min-height: 70vh; }
+
+.hero {
+  background: var(--surface);
+  border-left: 6px solid var(--orange);
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-bottom: 20px;
+}
+.hero h1 { font-size: 1.8rem; margin-bottom: 8px; max-width: 700px; }
+.hero p { color: var(--muted); }
+
+.filters { display: flex; gap: 12px; margin-bottom: 20px; }
+.filters input { flex: 1; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+.card, .panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.card { display: flex; flex-direction: column; gap: 8px; }
+.card h3 { margin: 0; font-size: 1.1rem; }
+.card-foot { margin-top: auto; display: flex; justify-content: space-between; align-items: center; padding-top: 10px; }
+
+.tag {
+  align-self: flex-start;
+  background: var(--tag-bg);
+  color: var(--orange-dark);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 20px;
+}
+
+.rating { color: var(--muted); font-size: 0.9rem; }
+
+.row-between { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+
+/* ---------- Forms and buttons ---------- */
+input, select, textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font: inherit;
+  background: var(--surface);
+}
+input:focus, select:focus, textarea:focus, button:focus-visible {
+  outline: 3px solid #f7b98b;
+  border-color: var(--orange);
+}
+input:disabled { background: var(--soft); color: var(--muted); }
+
+.form { display: flex; flex-direction: column; gap: 14px; max-width: 560px; }
+.form label { display: flex; flex-direction: column; gap: 4px; font-weight: 600; font-size: 0.92rem; }
+.form input, .form select, .form textarea { font-weight: 400; }
+
+.btn {
+  background: var(--orange);
+  color: var(--white);
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn:hover { background: var(--orange-dark); }
+.btn-light { background: var(--surface); color: var(--ink); border: 1px solid var(--line); }
+.btn-light:hover { background: var(--soft); }
+.btn-danger { background: var(--red); }
+.btn-danger:hover { background: #962d22; }
+.btn-small { padding: 5px 12px; font-size: 0.85rem; }
+
+.link-btn {
+  background: none;
+  border: none;
+  color: var(--orange-dark);
+  font: inherit;
+  cursor: pointer;
+  margin-bottom: 14px;
+}
+
+/* ---------- Course detail ---------- */
+.detail-head { margin-bottom: 18px; }
+.detail-head h2 { margin: 8px 0; }
+
+.progress {
+  background: var(--soft);
+  border-radius: 20px;
+  height: 12px;
+  overflow: hidden;
+  margin: 8px 0;
+}
+.progress-fill { background: var(--green); height: 100%; transition: width 0.3s; }
+
+.lesson-list { list-style: none; margin-top: 10px; }
+.lesson-list li {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 4px;
+  border-bottom: 1px solid var(--line);
+}
+.lesson-list input { width: 18px; height: 18px; }
+.lesson-list .done { text-decoration: line-through; color: var(--muted); }
+
+.comment { border-bottom: 1px solid var(--line); padding: 12px 0; }
+.comment strong { margin-right: 8px; }
+
+/* ---------- Notifications ---------- */
+.note-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.note-list li {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+}
+.note-list li.unread { border-left: 5px solid var(--orange); }
+
+/* ---------- Admin ---------- */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }
+.stat strong { display: block; font-size: 1.8rem; color: var(--orange-dark); }
+
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--line); }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); font-size: 0.92rem; }
+th { background: var(--soft); }
+
+/* ---------- Login box ---------- */
+.auth-box { max-width: 460px; margin: 20px auto; }
+.tabs { display: flex; margin-bottom: 18px; border-bottom: 2px solid var(--line); }
+.tab {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 10px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--muted);
+}
+.tab.active { color: var(--orange-dark); border-bottom: 3px solid var(--orange); margin-bottom: -2px; }
+
+/* ---------- Footer and toast ---------- */
+.footer { text-align: center; padding: 18px; color: var(--muted); font-size: 0.88rem; border-top: 1px solid var(--line); }
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bar);
+  color: var(--white);
+  padding: 12px 22px;
+  border-radius: 8px;
+  z-index: 50;
+  max-width: 90%;
+}
+
+/* ---------- Mobile screens ---------- */
+@media (max-width: 720px) {
+  .menu-btn { display: block; }
+  .nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    background: var(--bar);
+    padding: 10px 16px 16px;
+  }
+  .nav.open { display: flex; }
+  .nav button { text-align: left; }
+  .filters { flex-direction: column; }
+  .hero h1 { font-size: 1.4rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+
+/* ---------- Lesson list and reading page ---------- */
+input, select, textarea { color: var(--ink); }
+.lesson-list .lesson-row { padding: 0; }
+.lesson-link {
+  display: flex; align-items: center; gap: 12px; width: 100%;
+  background: none; border: none; padding: 12px 6px; border-radius: 6px;
+  font: inherit; color: var(--ink); text-align: left; cursor: pointer;
+}
+.lesson-link:hover { background: var(--soft); }
+.lesson-go { margin-left: auto; }
+.lesson-status {
+  width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--line);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 0.85rem; flex-shrink: 0;
+}
+.lesson-status.is-done { background: var(--green); border-color: var(--green); color: #fff; }
+.reader h2 { margin: 6px 0 16px; }
+.theory p { margin-bottom: 14px; max-width: 70ch; font-size: 1.02rem; line-height: 1.75; }
+.reader-actions { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); }
+.lesson-nav { display: flex; justify-content: space-between; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.theme-btn { font-size: 1.15rem; }
+
+/* ---------- Night and neon themes ---------- */
+[data-theme="night"] {
+  color-scheme: dark;
+  --bg: #0f1218; --surface: #181c25; --ink: #e9ecf2; --muted: #9aa3b2;
+  --line: #2b3140; --bar: #0a0c11; --soft: #232836; --tag-bg: #3a2415;
+  --orange: #f0762b; --orange-dark: #ff9a5c;
+}
+[data-theme="neon"] {
+  color-scheme: dark;
+  --bg: #07040f; --surface: #130a24; --ink: #f4ecff; --muted: #b19ad6;
+  --line: #4b1f7a; --bar: #0d0618; --soft: #241040; --tag-bg: #2a0f4a;
+  --orange: #d11fb8; --orange-dark: #ff6df0;
+}
+[data-theme="neon"] .card,
+[data-theme="neon"] .panel,
+[data-theme="neon"] .stat,
+[data-theme="neon"] .hero { border-color: var(--orange-dark); box-shadow: 0 0 14px rgba(209, 31, 184, 0.35); }
+[data-theme="neon"] .btn { box-shadow: 0 0 12px var(--orange); }
+[data-theme="neon"] .brand { border-color: var(--orange-dark); text-shadow: 0 0 10px var(--orange-dark); }
+[data-theme="neon"] h1, [data-theme="neon"] h2 { text-shadow: 0 0 8px rgba(255, 109, 240, 0.5); }
